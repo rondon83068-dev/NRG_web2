@@ -1,0 +1,45 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("embedForm");
+
+  const fields = {
+    title: document.getElementById("embedTitle"),
+    description: document.getElementById("embedDescription"),
+    author: document.getElementById("embedAuthor"),
+    footer: document.getElementById("embedFooter"),
+    color: document.getElementById("embedColor"),
+    fieldName: document.getElementById("fieldName"),
+    fieldValue: document.getElementById("fieldValue"),
+  };
+
+  const preview = {
+    title: document.getElementById("previewTitle"),
+    description: document.getElementById("previewDescription"),
+    author: document.getElementById("previewAuthor"),
+    footer: document.getElementById("previewFooter"),
+    fieldName: document.getElementById("previewFieldName"),
+    fieldValue: document.getElementById("previewFieldValue"),
+    accent: document.getElementById("embedAccent"),
+  };
+
+  const updatePreview = () => {
+    preview.title.textContent = fields.title.value || "Mission Brief";
+    preview.description.textContent = fields.description.value || "Operations are underway.";
+    preview.author.textContent = fields.author.value || "NRG Command";
+    preview.footer.textContent = fields.footer.value || "Prepared for tomorrow";
+    preview.fieldName.textContent = fields.fieldName.value || "Status";
+    preview.fieldValue.textContent = fields.fieldValue.value || "Full Response / Ready";
+    preview.accent.style.background = fields.color.value || "#c1121f";
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    updatePreview();
+  });
+
+  Object.values(fields).forEach((field) => {
+    field.addEventListener("input", updatePreview);
+    field.addEventListener("change", updatePreview);
+  });
+
+  updatePreview();
+});
